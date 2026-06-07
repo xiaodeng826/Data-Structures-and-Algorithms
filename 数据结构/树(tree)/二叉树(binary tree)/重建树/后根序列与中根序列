@@ -1,1 +1,47 @@
+//已知条件是树的后根序列与中根序列。同时还要判断序列是否合法
+
+
+1 核心: 递归调用和片段的截取
+
+2 思路: *(1)明确递归函数的作用和终止条件
+        (2)传入正确截取再自身调用
+
+3 实现代码(CPP):
+int judge = 0;
+
+struct node{
+    char data;
+    node* left;
+    node* right;
+} ;
+
+node* build(string bi,string mid,int a1,int a2,int b1,int b2){      //bi、mid分别是总后根、中根序列。a、b分别对序列进行截取，后续调用
+    //检查是否结束
+    if(judge){return NULL;}
+    if(a1>a2&&b1>b2){return NULL;}
+    if(a1>a2||b1>b2){
+        judge = 1;
+        return NULL;
+    }
+
+    //检查是否合法
+    int k = -1;
+    char ch = bi[a2];
+    for(int i = b1; i <= b2; ++i){
+        if(mid[i]==ch){k=i;break;}
+        if(i==b2){
+            judge = 1;
+            return NULL;
+        }
+    }
+
+    //构建
+    int len = k - b1;
+    node* root = new node;
+    root->data = bi[a2];
+    root->left = build(bi,mid,a1,a1+len-1,b1,k-1);
+    root->right = build(bi,mid,a1+len,a2-1,k+1,b2);
+
+    return root;
+}
 
