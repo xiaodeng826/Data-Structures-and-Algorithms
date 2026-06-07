@@ -1,0 +1,10 @@
+//
+
+
+void unite(int x,int y){    //把y所在的集合并入x所在集合
+  int ry = find(y);
+  int rx = find(x);
+  if(rx!=ry){
+    pa[ry] = rx;
+  }
+}
