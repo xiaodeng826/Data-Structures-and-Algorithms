@@ -1,1 +1,31 @@
+1 核心: 顺次推进指针按照访问的方式创建
 
+2 思路: (1)使用全局index记录访问指针
+        (2)
+
+
+3 实现代码(CPP):
+int index = 0;      //这是全局变量，在递归中也能改变索引
+
+struct node{
+    int data;
+    node* left;
+    node* right;
+};
+
+node* build(vector<int> &a,int len){        //这个函数的意思是根据先根序列a(使用当前index开头),返回一个对应的二叉树的根
+    //终止条件
+    if(index==len){return NULL;}
+    if(a[index]==0){
+        index++;
+        return NULL;
+    }
+    
+    //构建
+    node* root = new node{a[index],NULL,NULL};
+    index++;
+    root->left = build(a,len);        //这个只会跑完左子树对应的先根序列，然后把index移动到右子树的首位
+    root->right = build(a,len);      //根据剩下的右子树先根序列构建 二叉树
+    
+    return root;
+}
