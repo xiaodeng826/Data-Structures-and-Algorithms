@@ -1,0 +1,8 @@
+//
+
+
+int find(int x){    //返回的是集合的代表元
+  if(pa[x]==-1){return x;}    //退无可退，说明已经回退到代表元了
+  pa[x] = find(pa[x]);  //回退的同时缩短路径
+  return pa[x];
+}
