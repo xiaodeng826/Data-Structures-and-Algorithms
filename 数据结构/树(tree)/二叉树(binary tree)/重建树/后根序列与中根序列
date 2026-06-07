@@ -18,7 +18,7 @@ struct node{
 node* build(string bi,string mid,int a1,int a2,int b1,int b2){      //bi、mid分别是总后根、中根序列。a、b分别对序列进行截取，后续调用
     //检查是否结束
     if(judge){return NULL;}
-    if(a1>a2&&b1>b2){return NULL;}
+    if(a1>a2&&b1>b2){return NULL;}        //同时交错是正常结束方式
     if(a1>a2||b1>b2){
         judge = 1;
         return NULL;
