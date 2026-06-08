@@ -42,6 +42,8 @@ void dijkstra(int g[maxn][maxn],int k,int path[],int a[]){       //邻接矩阵/
 }
 
 
+4 局限:(1)邻接矩阵不能太大
+
 
 
 
