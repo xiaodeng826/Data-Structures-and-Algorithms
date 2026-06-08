@@ -11,5 +11,55 @@
 
 
 3 实现代码(CPP):
-//注意:有些代码要写在main函数中
-#define maxn 
+//相关数据:n是点的总数,g是邻接矩阵
+#define maxn 1000
+
+int path[maxn];              //实时最短距离
+for(int i = 0; i < n; ++i){
+       path[i] = maxn;
+}
+int a[maxn] = {0};       //目前已知区域为NULL
+
+void dijkstra(int g[maxn][maxn],int k,int path[],int a[]){       //邻接矩阵/起点/实时最短距离/已知邻域
+       //初始化起点本身到自己的距离肯定为0
+       path[k] = 0;
+       int num = 0;
+
+       //核心部分
+       while(num!=n){
+              int q1 = getmini(path,a);              //getmini函数就是返回path数组中未知邻域的最小值的点,如果没有最小值就返回-1
+              if(q1==-1){break;}              //具体情况可以加入标记的改变
+              a[q1] = 1;       //纳入A
+
+              for(int i = 0; i < n; ++i){
+                     if(g[q1][i]!=maxn&&a[i]==0){
+                     int cu = path[q1] + g[q1][i];
+                     if(cu<path[i]){path[i] = cu;}
+                     }
+              }
+              num++;
+       }  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
