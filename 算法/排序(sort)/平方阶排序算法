@@ -31,14 +31,19 @@
         void bubble(int r[],int n){        //同上
             for(int i=n; i>=2; --i){
                 int index = 1;
+                //int mark = i-1;    最后一次冒泡的索引
                 while(index!=i){
                     if(r[index]>r[index+1]){
                         swap(r[index],r[index+1]);
-                    }
+                        //mark = index;        
+                    } 
                     ++index;
                 }
+                //i = mark; 
             }
         }
+
+    (3)时间：(n:注释版本；n^2：未注释版本),n^2,n^2.    空间：1.    稳定    
         
 
 
