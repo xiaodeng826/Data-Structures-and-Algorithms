@@ -1,0 +1,32 @@
+1 堆的本质：具有大小关系的二叉树。根比节点大是大顶堆(这个排序方法所用的)，根比节点小是小顶堆。
+
+2 补充知识：二叉树和数组的映射关系，索引为i的父节点是i/2,左孩子2*i,右孩子2*i+1。数组必然可以映射为一个完全二叉树
+
+3 基本操作的实现代码：
+    (1)上浮：元素变大时可能的操作
+        void up(int r[],int n){    //r是堆的映射数组，n是需要上浮的节点,索引是1->n
+          int cur = n;
+          while(cur>1){
+            int root = cur/2;
+            if(r[root]<r[cur]){
+              swap(r[root],r[cur]);    //一定要是引用参数
+              cur = root;
+            }
+            else{break;}
+          }
+        }
+
+    (2)下沉：
+        void down(int r[],int n,int a){    //分别是堆的映射数组，总节点数，需下沉节点
+          while(a<=n/2){    //a是当前可能需要下沉的节点的索引。小于等于n/2说明必然有左孩子，存在下沉条件
+            int maxchd = a*2;    //令最大孩子是左孩子
+            if(maxchd+1<=n && r[maxchd+1]>r[maxchd]){    //存在右孩子且右孩子更大
+              maxchd++;
+            }
+            if(r[maxchd]>r[a]){    //只有下沉才可能进一步下沉
+              swap(r[a],r[maxchd]);
+              a = maxchd;
+            }
+            else{break;}
+          }
+        }
