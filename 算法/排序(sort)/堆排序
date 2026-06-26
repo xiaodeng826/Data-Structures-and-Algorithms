@@ -30,3 +30,49 @@
             else{break;}
           }
         }
+
+    (3)堆的建立：(最坏时间复杂度是n)
+        void build(int r[],int n){
+            for(int i=n/2; i>=1; --i){
+                down(r,n,i);
+            }
+        }
+
+
+
+
+4 堆排序算法：
+    核心：每次下沉后，堆顶必定是最大元素
+    代码实现：
+        void heapsort(int r[],int n){
+            build(r,n);
+            for(int i=n; i>1; --i){
+                swap(r[1],r[i]);    //前i个元素的最大元素确定下了
+                down(r,i-1,1);    //下沉，对前i-1个元素排序
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
