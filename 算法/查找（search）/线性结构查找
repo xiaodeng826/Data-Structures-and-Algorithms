@@ -1,0 +1,29 @@
+1 顺序查找
+    (1)本质：顾名思义
+    (2)实现代码：
+        int search(int r[],int n,int k){      //关键词数组，总元素数，目标关键词
+          for(int i=1; i<=n; ++i){
+            if(r[i]==k){return i;}
+          }
+          return -1;
+        }
+
+
+
+2 二分查找
+  (1)本质：顾名思义
+  (2)实现代码：
+    int binarysearch(int r[],int m,int n,int k){
+      if(m>n){return -1;}    //终止条件
+
+      int t = (m+n)/2;
+      if(r[t]==k){return t;}
+      if(r[t]>k){return binarysearch(r,m,t-1,k);}
+      else{return binarysearch(r,t+1,n,k);}
+    }
+
+
+
+3 插值查找
+  (1)本质：
+  
