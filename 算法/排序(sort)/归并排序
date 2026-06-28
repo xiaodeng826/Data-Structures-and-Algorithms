@@ -1,0 +1,59 @@
+1 本质：把两个有序子序列合并为一个有序子序列
+
+2 核心：(1)归并操作
+
+3 实现代码：
+    void merge(int r[],int low,int mid,int high){    //归并操作，把有序序列low->mid与mid+1->high按序合并
+      int i = low;
+      int j = mid + 1;
+      int p = 0;
+      int* x = new int[high-low+1];
+      while(i<=mid&&j<=high){
+        if(r[i]<=r[j]){x[p++]=r[i++];}
+        else{x[p++]=r[j++];}
+      }
+      while(i<=mid){x[p++]=r[i++];}
+      while(j<=high){x[p++]=r[j++];}
+      p = 0;
+      for(int i=low; i<=high; ++i){    //整体赋值
+        r[i] = x[p++];
+      }
+      delete x;
+    }
+
+  void mergesort(int r[],int m,int n){
+    if(m>=n){return ;}    //终止条件很重要
+
+    int k = (m+1)/2;
+    mergesort(r,m,k);    //递归调用
+    mergesort(r,k+1,n);
+    merge(r,m,k,n);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
