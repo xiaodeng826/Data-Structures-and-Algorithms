@@ -25,5 +25,48 @@
 
 
 3 插值查找
-  (1)本质：
+  (1)本质：根据数据变化趋势预测，然后判断预测值与目标值的大小关系，在调控区间
+  (2)实现代码：
+        int insearch(int r[],int m,int n,int k){        //数组，初末索引，目标值
+            int low = m;
+            int high = n;
+            int mid;
+
+            while(low<=high&&k>r[low]&&k<r[high]){
+                if(r[low]==r[high]){        //当low到high都是同一个数。同时排除分母为零
+                    if(r[low]==k){return low;}
+                }
+
+                mid = low + (k-r[low])*(high-low)/(r[high]-r[low]);        //预测索引
+
+                if(r[mid]==k){return mid;}
+                else{
+                    if(r[mid]<k){low = mid + 1;}
+                    else{high = mid - 1;}
+                }
+            }
+            return -1;    
+        }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
