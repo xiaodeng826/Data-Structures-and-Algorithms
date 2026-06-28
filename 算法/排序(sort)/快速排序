@@ -9,9 +9,9 @@
       int L = m + 1;    //小指针
       int G = n;    //大指针
       while(L<=G){
-        while(r[L]<=k&&L<=n){L++;}    //顺序找一个大于K的数 
+        while(L<=n&&r[L]<=k){L++;}    //顺序找一个大于K的数 
         while(r[G]>k){G--;}        //顺序找一个小于等于K的数
-        if(L<G){      //若没交错，就交换。要引用参数
+        if(L<G){      //若没交错，就交换。要引用参数。
           swap(r[L],r[G]);
           L++;
           G--;
@@ -24,8 +24,8 @@
     void quick(int r[],int m,int n){
       if(m<n){
         int t = part(r,m,n);
-        quick(r,m,G-1);
-        quick(r,G+1,n);
+        quick(r,m,t-1);
+        quick(r,t+1,n);
       }
     }
 
