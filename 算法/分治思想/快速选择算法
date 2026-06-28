@@ -1,0 +1,70 @@
+//问题：寻找无序数组中第k小的元素
+
+
+1 本质：对目标对象进行分类划分，抉择对应划分块
+
+2 核心：(1)part函数(快速排序算法中涉及)
+        (2)若左区间有k-1个元素，则基准元素即是所找元素
+
+3 实现代码：
+    int part(int r[],int m,int n){
+      int k = r[m];
+      int L = m + 1;
+      int G = n;
+      while(L<=G){    //确保无交叉且结束后G是基准元素的索引
+        while(L<=n&&r[L]<k){L++；}
+        while(G>=m+1&&r[G]>=k){G--;}
+        if(G>L){
+          swap(r[G],r[L]);
+          G--;
+          L++;
+        }
+      }
+      swap(r[m],r[G]);
+      return G;    //返回基准点索引
+    }
+
+    int quickselect(int r[],int m,int n,int k){    //数组，元素数，第k小.默认索引m->n
+      int t = part(r,m，n);
+      int len = t-m+1;    //从起点到基准点的长度
+      if(len==k){
+        return r[t];
+      }
+      else{
+        if(len<k){
+          int a = k - len;
+          return quickselect(r,t+1,n,a);
+        }
+        else{
+          return quickselect(r,m,t-1,k);
+        }
+      }
+      return -1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
