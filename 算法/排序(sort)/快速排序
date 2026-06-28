@@ -1,1 +1,30 @@
+1 本质:构造递归调用的条件
 
+2 核心：(1)分治的方法构造出等价的两个部分
+       (2)用的part函数来构造
+
+3 实现代码：
+    int part(int r[],int m,int n){
+      int k = r[m];    //基准数
+      int L = m + 1;    //小指针
+      int G = n;    //大指针
+      while(L<=G){
+        while(r[L]<=k&&L<=n){L++;}    //顺序找一个大于K的数 
+        while(r[G]>k){G--;}        //顺序找一个小于等于K的数
+        if(L<G){      //若没交错，就交换。要引用参数
+          swap(r[L],r[G]);
+          L++;
+          G--;
+        }    
+      }
+      swap(r[m],r[G]);
+      return G;
+    }
+
+    void quick(int r[],int m,int n){
+      if(m<n){
+        int t = part(r,m,n);
+        quick(r,m,G-1);
+        quick(r,G+1,n);
+      }
+    }
