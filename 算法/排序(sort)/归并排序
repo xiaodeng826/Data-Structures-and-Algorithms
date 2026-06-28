@@ -18,13 +18,13 @@
       for(int i=low; i<=high; ++i){    //整体赋值
         r[i] = x[p++];
       }
-      delete x;
+      delete[] x;        //释放以x为头指针的数组
     }
 
   void mergesort(int r[],int m,int n){
     if(m>=n){return ;}    //终止条件很重要
 
-    int k = (m+1)/2;
+    int k = (m+n)/2;
     mergesort(r,m,k);    //递归调用
     mergesort(r,k+1,n);
     merge(r,m,k,n);
