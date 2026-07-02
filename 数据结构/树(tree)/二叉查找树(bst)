@@ -1,3 +1,74 @@
 1 结构：树的结构遵循左孩子小于根，右孩子大于根
 
-2 
+2 各个操作的实现代码
+    (1)查找
+        node* search(node* root,int k){
+          if(root==NULL||root->key==k){return root;}
+          else{
+            if(k<root->key){return search(root->left,k);}
+            else{return search(root->right,k);}
+          }
+        }
+
+    (2)插入
+      void insert(node* &root,int k){    //引用时是因为要改变的是地址的指向
+        if(root==NULL){
+          node* p = new node(k,NULL,NULL);
+          root = p;
+        }
+        else{
+          if(k<root->key){insert(root->left,k);}
+          else{insert(root->right,k);}
+        }
+      }
+
+    (3)删除
+      void del(node* &root,int k){      //指针的本质就是一个存有地址的变量
+        if(root==NULL){return;}    //终止条件，找到最后没有这个值
+        if(k < root->key){del(root->left,k);}    //递归找k
+        else{
+          if(k > root->key){del(root->right,k);}    //递归找k
+          else{      //若是k，开始删除操作
+            if(root->left==NULL&&root->right==NULL){  //没有孩子
+              node* old = root;
+              root = NULL;
+              delete old;
+            }
+            else{
+              if(root->left!=NULL&&root->right!=NULL){    //有两个孩子，需要把右子树的最左边的叶子节点替为父节点
+                node* p = root->right;
+                while(p->left!=NULL){p = p->left;}
+                root->key = p->key;
+                del(root->right,p->key);
+              }
+              else{
+                node* old = root;
+                root = (root->left==NULL)? root->right:root->left;
+                delete old;
+              }
+            }
+          }         
+        }
+      }
+
+3 性质：平均时间是o(h)h是高度，最坏时间是o(n)，h在大多数情况下是log n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
